@@ -3,11 +3,12 @@
 
 In this session, the next topics are covered:
 
-- Java project management with Maven. 
+- Java project management with Maven.
 - Maven in Intellij IDEA.
 - Management of dependencies in application deployment.
-- The package JInterface for Java-Erlang interaction. 
+- The package JInterface for Java-Erlang interaction.
 - Exercises with Maven.
+
 ## Required software
 
 For this session it is required to have installed:
@@ -23,10 +24,13 @@ Also, do not forget to define the following environment variables:
 - `JDK_HOME` -> root directory of your JDK installation.
 - Update the `PATH` environment variable by adding the `bin` directories of your JDK and Maven installations.
 
+(*) You can avoid doing all these step manually by installing
+[SDKMAN](https://sdkman.io/).
+
 **Make sure Erlang Port Mapper Daemon (epmd) is running.**
 ## Jinterface installation
 
-Install into your Maven local repository the jinterface dependency: 
+Install into your Maven local repository the jinterface dependency:
 
 ```sh
 mvn install:install-file \
@@ -39,7 +43,7 @@ mvn install:install-file \
 ```
 
 ## Exercise 03: Hello from Erlang!
- 
+
 Enter to the "erlang_files" directory and compile all erlang files
 
 ```bash
@@ -65,7 +69,7 @@ The server process should display the following message:
 
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise03 java class and run it.
 ## Exercise 04: Cookie Quotes Server
- 
+
 Enter to the "erlang_files" directory and compile all erlang files
 
 ```bash
@@ -96,4 +100,3 @@ quotes_server: waiting for new messages...
 ```
 
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise04 java class and run it.
-
