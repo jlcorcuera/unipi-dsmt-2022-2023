@@ -22,7 +22,6 @@
       <groupId>com.ericsson</groupId>
       <artifactId>erlang-jinterface</artifactId>
       <version>1.13.1</version>
-      <scope>provided</scope>
     </dependency>
   </dependencies>
 

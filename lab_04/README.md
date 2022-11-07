@@ -56,8 +56,8 @@ To start the Hello Erlang Server process:
 ```bash
   erl -name hello_server@127.0.0.1 \
       -setcookie 'hellocookie' \
-      -s hello_server \
-      init -noshell
+      -s hello_server init \
+      -noshell
 ```
 
 The server process should display the following message:
@@ -82,8 +82,8 @@ To start the Hello Erlang Server process:
 ```bash
   erl -name quotes_server@127.0.0.1 \
       -setcookie 'abcde' \
-      -s quotes_server \
-      init -noshell
+      -s quotes_server init \
+      -noshell
 ```
 
 The server process should display the following message:
