@@ -1,0 +1,49 @@
+
+# Hands-on session 6: Java EE - Part 1: Servlets
+
+
+In this session, the next topics are covered:
+
+- Jakarta EE evolution
+- Creating our first Maven Java Web Application
+- Running our first Maven Java Web Application
+- Structure of a Maven Java Web Application
+- The web.xml file
+- ServletContextListener interface
+- Servlets
+
+
+## Required software
+
+For this session it is required to have installed:
+
+- Java SDK 11. (*)
+- Apache Maven 3.x version. (*)
+- Apache Tomcat 9.x version.
+- An IDE (IntelliJ, Eclipse, Netbeans)
+
+Also, do not forget to define the following environment variables:
+
+- `M2_HOME` -> root directory of your Maven installation.
+- `JDK_HOME` -> root directory of your JDK installation.
+- Update the `PATH` environment variable by adding the `bin` directories of your JDK and Maven installations.
+
+(*) You can avoid doing all these step manually by installing
+[SDKMAN](https://sdkman.io/).
+
+**Make sure Erlang Port Mapper Daemon (epmd) is running.**
+## Jinterface installation
+
+## Exercise 01: The Calculator
+
+The solution will be uploaded tomorrow at 14:00.
+
+## Exercise 02: The Fortune Cookie Servlet
+
+The solution will be uploaded tomorrow at 14:00.
+
+## Exercise 03: Beers REST API
+
+The solution will be uploaded tomorrow at 14:00.
+
+
