@@ -31,8 +31,6 @@ Also, do not forget to define the following environment variables:
 (*) You can avoid doing all these step manually by installing
 [SDKMAN](https://sdkman.io/).
 
-**Make sure Erlang Port Mapper Daemon (epmd) is running.**
-## Jinterface installation
 
 ## Exercise 01: The Calculator
 
