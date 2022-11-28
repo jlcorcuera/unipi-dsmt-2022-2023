@@ -1,0 +1,25 @@
+<html>
+<script>
+    function call_post(action) {
+        alert('Action: ' + action);
+        document.getElementById("action").value = action;
+        document.getElementById('calculator_form').submit();
+    }
+</script>
+<body>
+<h2>The server calculator!!!</h2>
+<br>
+<form id="calculator_form" action="http://localhost:8080/lab_06/CalculatorServlet" method="POST">
+    A: <input type="number" name="a"> <br/>
+    B: <input type="number" name="b"/>
+    <input id="action" type="hidden" name="action" value=""/>
+    <br>
+    <br>
+    <button id="add" onclick="javascript:call_post('add');">Add</button>
+    <button id="sub" onclick="javascript:call_post('sub');">Sub</button>
+    <button id="mul" onclick="javascript:call_post('mul');">Mul</button>
+    <button id="div" onclick="javascript:call_post('div');">Div</button>
+</form>
+</br>
+</body>
+</html>
