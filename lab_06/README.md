@@ -227,6 +227,16 @@ public class FortuneCookieServlet extends HttpServlet {
 
 ## Exercise 03: Beers REST API
 
+For this exercise, it is required to add a dependency for handling JSON representations so lets work with Jackson library:
+
+```xml
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.12.4</version>
+    </dependency>
+```
+
 Similar as in the previous exercise, we have to load the information from this beers.json file once.
 
 ```java
