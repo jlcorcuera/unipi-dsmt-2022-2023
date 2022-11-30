@@ -18,7 +18,7 @@ For this session it is required to have installed:
 
 - Java SDK 11. (*)
 - Apache Maven 3.x version. (*)
-- [Apache Tomcat 10.0.27] (https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.zip) version.
+- [Apache Tomcat 10.0.27](https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.zip) version.
 - An IDE (IntelliJ, Eclipse, Netbeans)
 
 Also, do not forget to define the following environment variables:
