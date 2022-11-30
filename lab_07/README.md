@@ -35,7 +35,7 @@ Also, do not forget to define the following environment variables:
 
 The solution will be uploaded this weekend.
 
-## Exercise 02: Register a new beer
+## Exercise 02: Registering a new beer
 
 The solution will be uploaded this weekend.
 
