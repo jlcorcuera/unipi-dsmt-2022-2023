@@ -74,6 +74,8 @@
 <body>
 <%
   List<BeerDTO> beerDTOList = (List<BeerDTO>) request.getAttribute("beers");
+  String search = request.getAttribute("search") != null ? request.getAttribute("search").toString() : "";
+  boolean hasResults = beerDTOList != null && !beerDTOList.isEmpty();
 %>
 <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -94,8 +96,8 @@
             <a class="nav-link disabled">Disabled link</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" method="post" action="${pageContext.request.contextPath}/BeerSearchServlet">
+          <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="<%= search%>">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
@@ -118,22 +120,26 @@
     <div class="album py-5 bg-light">
       <div class="container">
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <% for(BeerDTO beer: beerDTOList) { %>
-          <div class="col">
-            <div class="card shadow-sm">
-              <img class="product_img" src="<%= beer.getImageUrl()%>" />
-              <div class="card-body">
-                <p class="card-text"><%= beer.getName() %></p>
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+          <% if (hasResults) { %>
+            <% for(BeerDTO beer: beerDTOList) { %>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img class="product_img" src="<%= beer.getImageUrl()%>" />
+                <div class="card-body">
+                  <p class="card-text"><%= beer.getName() %></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                    </div>
+                    <small class="text-muted">Rating: <%= beer.getRating() %></small>
                   </div>
-                  <small class="text-muted">Rating: <%= beer.getRating() %></small>
                 </div>
               </div>
             </div>
-          </div>
+            <% } %>
+          <% } else { %>
+            <p>No results found.</p>
           <% } %>
         </div>
       </div>
