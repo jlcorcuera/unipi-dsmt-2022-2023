@@ -36,39 +36,39 @@ Also, do not forget to define the following environment variables:
 The solution is straightforward, when a user clicks on the Search button, a POST to the BeerSearchServlet servlet have to be performed:
 
 ```html
-    <form class="d-flex" role="search" method="post" action="${pageContext.request.contextPath}/BeerSearchServlet">
-      <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="<%= search%>">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+<form class="d-flex" role="search" method="post" action="${pageContext.request.contextPath}/BeerSearchServlet">
+  <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search" value="<%= search%>">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
 ```
 
 As you can see, the value that you write into the search input text is identified in the request as **search**. 
 Next, in the servlet we have to retrieve that value and pass it to the **BeersDAO.search** method:
 
 ```java
-    @WebServlet(name = "BeerSearchServlet", value = "/BeerSearchServlet")
-    public class BeerSearchServlet extends HttpServlet {
-    
-        private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            String searchFilter = request.getParameter("search") != null ? request.getParameter("search") : "";
-            List<BeerDTO> beerDTOList = BeersDAO.search(searchFilter);
-            request.setAttribute("beers", beerDTOList);
-            request.setAttribute("search", searchFilter);
-            String targetJSP = "/WEB-INF/jsp/search.jsp";
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(targetJSP);
-            requestDispatcher.forward(request, response);
-        }
-        @Override
-        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            processRequest(request, response);
-        }
-    
-        @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-            processRequest(request, response);
-        }
-    
+@WebServlet(name = "BeerSearchServlet", value = "/BeerSearchServlet")
+public class BeerSearchServlet extends HttpServlet {
+
+    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String searchFilter = request.getParameter("search") != null ? request.getParameter("search") : "";
+        List<BeerDTO> beerDTOList = BeersDAO.search(searchFilter);
+        request.setAttribute("beers", beerDTOList);
+        request.setAttribute("search", searchFilter);
+        String targetJSP = "/WEB-INF/jsp/search.jsp";
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(targetJSP);
+        requestDispatcher.forward(request, response);
     }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+}
 ```
 
 Pay attention to the **processRequest** method. This method is used to handle GET or POST calls.
