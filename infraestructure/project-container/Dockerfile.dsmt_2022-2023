@@ -1,0 +1,46 @@
+# To build the image: docker build -f Dockerfile.dsmt_2022-2023 -t unipi/dsmt:20222023 .
+# To run the image: docker run -p 9084:8084 -p 9080:8080 -p 5858:4848 -it --entrypoint bash --name dsmt-20222023 unipi/dsmt:20222023
+# To connect to a running container: docker exec -it dsmt-20222023 /bin/bash
+
+FROM ubuntu:22.04
+
+# For more information: https://stackoverflow.com/questions/20635472/using-the-run-instruction-in-a-dockerfile-with-source-does-not-work
+SHELL ["/bin/bash", "-c"]
+
+# Very useful: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+RUN apt-get update \
+	&& apt-get install -y curl unzip zip apt-utils wget erlang \
+	&& curl -s "https://get.sdkman.io" | bash \
+	&& source "$HOME/.sdkman/bin/sdkman-init.sh" \
+	&& sdk install java 11.0.12-open || true \
+	&& sdk install maven 3.8.6 || true \
+	&& wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.0.27/bin/apache-tomcat-10.0.27.zip -O /tmp/apache-tomcat-10.0.27.zip \
+	&& wget https://www.eclipse.org/downloads/download.php?file=/ee4j/glassfish/glassfish-6.2.5.zip -O /tmp/glassfish-6.2.5.zip \
+	&& mkdir $HOME/servers \
+	&& mv /tmp/*.zip $HOME/servers \
+	&& cd $HOME/servers \
+	&& unzip $HOME/servers/apache-tomcat-10.0.27.zip \
+	&& unzip $HOME/servers/glassfish-6.2.5.zip \
+	&& rm -f $HOME/servers/*.zip \
+	&& chmod +x $HOME/servers/apache-tomcat-10.0.27/bin/*.sh \
+	&& chmod +x $HOME/servers/glassfish6/bin/*
+
+WORKDIR /root
+
+# Tomcat: updating tomcat-users.xml, server.xml files
+COPY tomcat-conf/tomcat-users.xml ./servers/apache-tomcat-10.0.27/conf/tomcat-users.xml
+COPY tomcat-conf/server.xml ./servers/apache-tomcat-10.0.27/conf/server.xml
+
+# Tomcat: updating context.xml on manager web app to allow users access from anywhere
+COPY tomcat-conf/context.xml ./servers/apache-tomcat-10.0.27/webapps/manager/META-INF/context.xml
+
+# Glassfish: defining a file to change the admin password and another one to enable secure access to the admin console
+COPY glassfish-conf/tmpfile /tmp/tmpfile
+COPY glassfish-conf/pwdfile /tmp/pwdfile
+
+# Glassfish: changing password and enabling secure access to the administration console
+RUN $HOME/servers/glassfish6/bin/asadmin start-domain \
+	&& $HOME/servers/glassfish6/bin/asadmin --user admin --passwordfile=/tmp/tmpfile change-admin-password \
+	&& $HOME/servers/glassfish6/bin/asadmin --user admin --passwordfile=/tmp/pwdfile enable-secure-admin \
+	&& $HOME/servers/glassfish6/bin/asadmin stop-domain \
+	&& rm -f /tmp/tmpfile /tmp/pwdfile
