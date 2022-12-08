@@ -40,6 +40,8 @@ In case it is not running, run the command of the previous step. Next:
 docker exec -it dsmt-20222023 /bin/bash
 ```
 
+** Once you connect to a container, you have to run manually either Apache Tomcat or Glassfish. **
+
 ## Applications inside the container
 
 The docker file definition was configured to create a container with the following programs:
@@ -69,3 +71,5 @@ So the URLs of the servers are:
 
 - Apache Tomcat:    http://localhost:9084
 - Glassfish:        http://localhost:9080
+- Glassfish Administration Console: https://localhost:5858/
+
