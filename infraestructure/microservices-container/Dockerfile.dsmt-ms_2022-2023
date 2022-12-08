@@ -1,0 +1,19 @@
+# To build the image: docker build -f Dockerfile.dsmt-ms_2022-2023 -t unipi/dsmt-ms:20222023 .
+# To run the image: docker run -d -t -p 9084:8084 -p 9080:8080 -p 5858:4848 --name dsmt-ms-20222023 unipi/dsmt-ms:20222023
+# To connect to a running container: docker exec -it dsmt-ms-20222023 /bin/bash
+
+FROM ubuntu:22.04
+
+# For more information: https://stackoverflow.com/questions/20635472/using-the-run-instruction-in-a-dockerfile-with-source-does-not-work
+SHELL ["/bin/bash", "-c"]
+
+# Very useful: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+RUN apt-get update \
+	&& apt-get install -y curl unzip zip apt-utils wget erlang \
+	&& curl -s "https://get.sdkman.io" | bash \
+	&& source "$HOME/.sdkman/bin/sdkman-init.sh" \
+	&& sdk install java 11.0.12-open || true
+
+# TODO
+
+ENTRYPOINT ["/bin/bash"]
