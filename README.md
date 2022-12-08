@@ -18,3 +18,7 @@
 - [Hands-on session 9: EJBs](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/lab_09)
 - [Hands-on session 10: JMS & Web Sockets](#)
 - [Hands-on session 11: Microservices](#)
+
+## Optional
+
+Configuration of [two Docker images](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/infraestructure) are provided.
