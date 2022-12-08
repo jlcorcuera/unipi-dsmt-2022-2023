@@ -1,5 +1,5 @@
 # To build the image: docker build -f Dockerfile.dsmt_2022-2023 -t unipi/dsmt:20222023 .
-# To run the image: docker run -p 9084:8084 -p 9080:8080 -p 5858:4848 -it --entrypoint bash --name dsmt-20222023 unipi/dsmt:20222023
+# To run the image: docker run -d -t -p 9084:8084 -p 9080:8080 -p 5858:4848 --name dsmt-20222023 unipi/dsmt:20222023
 # To connect to a running container: docker exec -it dsmt-20222023 /bin/bash
 
 FROM ubuntu:22.04
@@ -44,3 +44,5 @@ RUN $HOME/servers/glassfish6/bin/asadmin start-domain \
 	&& $HOME/servers/glassfish6/bin/asadmin --user admin --passwordfile=/tmp/pwdfile enable-secure-admin \
 	&& $HOME/servers/glassfish6/bin/asadmin stop-domain \
 	&& rm -f /tmp/tmpfile /tmp/pwdfile
+
+ENTRYPOINT ["/bin/bash"]

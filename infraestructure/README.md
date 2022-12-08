@@ -24,7 +24,7 @@ docker build -f Dockerfile.dsmt_2022-2023 -t unipi/dsmt:20222023 .
 To create a docker container from the previous created image:
 
 ```sh
-docker run -p 9084:8084 -p 9080:8080 -p 5858:4848  -it --entrypoint bash --name dsmt-20222023 unipi/dsmt:20222023
+docker run -d -t -p 9084:8084 -p 9080:8080 -p 5858:4848 --name dsmt-20222023 unipi/dsmt:20222023
 ```
 
 ## Connecting to a running Final Project container
