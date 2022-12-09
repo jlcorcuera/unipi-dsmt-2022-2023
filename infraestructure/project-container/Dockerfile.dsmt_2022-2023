@@ -9,7 +9,7 @@ SHELL ["/bin/bash", "-c"]
 
 # Very useful: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 RUN apt-get update \
-	&& apt-get install -y curl unzip zip apt-utils wget erlang \
+	&& apt-get install -y curl unzip zip vim apt-utils wget erlang \
 	&& curl -s "https://get.sdkman.io" | bash \
 	&& source "$HOME/.sdkman/bin/sdkman-init.sh" \
 	&& sdk install java 11.0.12-open || true \
