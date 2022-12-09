@@ -70,6 +70,17 @@
         object-fit:contain;
       }
     </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    function addShoppingCart(productId, productName){
+        params = {action: 'add-product', productId: productId, productName: productName};
+        $.post("${pageContext.request.contextPath}/ShoppingCartServlet", params, function(result){
+          $("#counter").text(result);
+        }).fail(function(xhr, status, error) {
+          alert('error');
+        });
+    }
+  </script>
 </head>
 <body>
 <%
@@ -110,8 +121,8 @@
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">Servlet + JSP: Beer Search Page</h1>
           <p>
-            <a href="#" class="btn btn-primary my-2">Add new beer</a>
-            <a href="#" class="btn btn-secondary my-2">View shopping cart</a>
+            <a href="${pageContext.request.contextPath}/BeerManagerServlet?action=new" class="btn btn-primary my-2">Add new beer</a>
+            <a href="${pageContext.request.contextPath}/ShoppingCartServlet?action=view" class="btn btn-secondary my-2">View shopping cart <span id="counter"></span></a>
           </p>
         </div>
       </div>
@@ -130,7 +141,7 @@
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Add to cart</button>
+                      <button type="button" onclick='addShoppingCart("<%= beer.getId() %>", "<%= beer.getName() %>");' class="btn btn-sm btn-outline-secondary">Add to cart</button>
                     </div>
                     <small class="text-muted">Rating: <%= beer.getRating() %></small>
                   </div>

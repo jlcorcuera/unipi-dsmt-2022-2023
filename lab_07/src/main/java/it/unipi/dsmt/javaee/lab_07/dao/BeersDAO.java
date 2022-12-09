@@ -44,11 +44,18 @@ public class BeersDAO {
             throw new RuntimeException(e);
         }
     }
-
+    public static void create(BeerDTO beerDTO){
+        Beer beer = new Beer();
+        beer.setId(UUID.randomUUID().toString());
+        beer.setName(beerDTO.getName());
+        beer.setImage(beerDTO.getImageUrl());
+        beer.setRating(beerDTO.getRating());
+        beerList.add(beer);
+    }
     public static List<BeerDTO> search(String keyword){
         return beerList.stream()
                 .filter(beer -> beer.getName().toLowerCase().contains(keyword.toLowerCase()))
-                .map(beer -> new BeerDTO(beer.getName(), beer.getLink(), beer.getImage(), beer.getRating()))
+                .map(beer -> new BeerDTO(beer.getId(), beer.getName(), beer.getLink(), beer.getImage(), beer.getRating()))
                 .collect(Collectors.toList());
     }
 
