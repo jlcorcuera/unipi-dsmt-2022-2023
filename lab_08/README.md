@@ -67,10 +67,13 @@ For this option, it is required to build a configuration:
 
    1. Open the list of artifact available and click in **Artifact...** option.
    ![Deployment configuration tab](images/e2_p1_step2_configuration.png "Deployment configuration tab")
+   
    2. In the opened popup select the artifact you want to deploy.
    ![Select artifacts to deploy](images/e2_p1_step2_configuration_artifact_selection.png "Select artifacts to deploy")
+   
    3. In the same tab, update the context of your Web Application.
    ![Update artifact context](images/e2_p1_step2_configuration_custom_context.png "Update artifact context")
+   
    4. Go to the **Server** tab, update the options shown in the next image and click on **OK**.
    ![Select artifacts to deploy](images/e2_p1_step3.png "Select artifacts to deploy")
 
