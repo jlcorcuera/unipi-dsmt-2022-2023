@@ -132,4 +132,12 @@ Again, we are going to make use of the Glassfish Administration console. Note th
 
 ## Exercise 04: Referring and obtaining a remote reference of an Object.
 
-The solution will be uploaded Nov 8th.
+Here, there are 2 points that we have to answer:
+
+1. How can the lab_07 project invoke method of the EJBs defined in the project lab_07_ejb?
+
+Answer: by defining as a dependency a new Maven project which defines Interfaces and POJOs. These interfaces define methods which are implemented by the EJBs in the lab_07_ejb project.
+
+2. How can the lab_07 project get a reference of an EJB?
+
+Answer: we can use CDI (Contexts and Dependency Injection) or JNDI (Java Naming and Directory Interface). For the former, make use of the @EJB annotation, and for the other one, you have to use the JNDI identifier of the EJB (you can get it by searching into the ${GLASSFISH_HOME}/glassfish6/glassfish/domains/domain1/logs/server.log file).
