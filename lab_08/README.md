@@ -32,11 +32,69 @@ Also, do not forget to define the following environment variables:
 
 ## Exercise 01: Running Glassfish
 
-The solution will be uploaded Nov 8th.
+Once you downloaded the zip file of Glassfish 6.2.5 version, uncompress this folder and follow the next steps:
+
+1. Let's call ${GLASSFISH_HOME} the location where my Glassfish is (/home/jose/Software/glassfish-6.2.5/glassfish6)
+2. Open a terminal and move to the ${GLASSFISH_HOME}/bin directory. 
+3. Run the following: `chmod +x *`
+4. In the same location, run the following command: `./as-admin start-domain`
 
 ## Exercise 02: Deploying a Web App on Glassfish
 
-The solution will be uploaded Nov 8th.
+There are two ways of deploying a Web Application on Glassfish:
+
+### Deploying a Web Application using IntelliJ Ultimate
+
+For this option, it is required to build a configuration:
+
+1. On the toolbar, click on **Edit Configurations...**
+
+   ![Edit Configurations](images/e2_p1_configuration.png "Edit Configurations")
+
+2. In the shown popup, click on **Add new** or in the (+) and click on **GlassFish Server -> Local**
+
+   ![Add new configuration](images/e2_p1_new_configuration.png "Add new configuration")
+
+3. A new configuration window is displayed, and it is required to fill in the following information:
+   - Name: Enter a name for your configuration.
+   - Application server: Configure and select a Glassfish server.
+   - JRE: Choose 11 (in case you don't have it, please install it).
+   - Server Domain: domain1, it is the default one.
+
+   ![Edit new configuration](images/e2_p1_step1_configuration.png "Edit new configuration")
+
+4. It is time for configuring the artifacts to be deployed in this configuration so click on the **Deployment** tab:
+
+   1. Open the list of artifact available and click in **Artifact...** option.
+   ![Deployment configuration tab](images/e2_p1_step2_configuration.png "Deployment configuration tab")
+   2. In the opened popup select the artifact you want to deploy.
+   ![Select artifacts to deploy](images/e2_p1_step2_configuration_artifact_selection.png "Select artifacts to deploy")
+   3. In the same tab, update the context of your Web Application.
+   ![Update artifact context](images/e2_p1_step2_configuration_custom_context.png "Update artifact context")
+   4. Go to the **Server** tab, update the options shown in the next image and click on **OK**.
+   ![Select artifacts to deploy](images/e2_p1_step3.png "Select artifacts to deploy")
+
+5. Finally, run your configuration and a browser will be opened with your Web Application.
+   ![Run configuration](images/e2_p1_step4.png "Run configuration")
+
+
+### Deploying a Web Application using Glassfish Administration Console
+
+As a prerequisite for this, **Glassfish must be running**. 
+
+1. Build the **war** file of your Web Application by running the Maven **package** lifecycle.
+![Run package lifecycle](images/e2_p2_war_generation.png "Run package lifecycle")
+2. As a result, a war file is generated into the **target** folder.
+3. Open a browser and access to the following URL: **http://localhost:4848**.
+4. Go to **Applications** and click in the **Deploy...** button.
+![Deploy option](images/e2_p2_deploy_application.png "Deploy option")
+5. A new page is loaded and, you have to select your **war** file, edit the **Application name** field and click on OK button.
+![Select war](images/e2_p2_upload_war.png "Select war")
+6. Your Web Application will be displayed in the Applications list. Click on your Web Application.
+![Applications deployed list](images/e2_p2_list_apps.png "Applications deployed list")
+7. Finally, update the **Context Root** value and click on the OK button.
+![Updated context root](images/e2_p2_update_context.png "Updated context root")
+8. Open a browser and enter the following URL: http://localhost:8080/lab-09-web/
 
 ## Exercise 03: Creating a JDBC Resource
 
