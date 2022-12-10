@@ -38,6 +38,7 @@ Once you downloaded the zip file of Glassfish 6.2.5 version, uncompress this fol
 2. Open a terminal and move to the ${GLASSFISH_HOME}/bin directory. 
 3. Run the following: `chmod +x *`
 4. In the same location, run the following command: `./as-admin start-domain`
+5. Moreover, for stopping it run the following command: `./as-admin stop-domain`
 
 ## Exercise 02: Deploying a Web App on Glassfish
 
@@ -101,7 +102,33 @@ As a prerequisite for this, **Glassfish must be running**.
 
 ## Exercise 03: Creating a JDBC Resource
 
-The solution will be uploaded Nov 8th.
+Again, we are going to make use of the Glassfish Administration console. Note that for this point, we are going to use a MySQL Database.
+
+1. Make sure Glassfish server is stopped.
+2. Download a JDBC driver for your MySQL server version. You can download it from this URL: https://repo1.maven.org/maven2/mysql/mysql-connector-java/
+3. Place the **jar** file downloaded in the previous point in the directory **${GLASSFISH_HOME}/glassfish6/glassfish/domains/domain1/lib/**.
+4. In the Glassfish Administration page, access to the **JDBC Connection Pools** pages and click **New...**.
+   ![JDBC Connection Pools page](images/e2_p3_jdbc_connection_pools.png "JDBC Connection Pools page")   
+5. In the next page, enter the following values and click in Next.
+   - Pool Name
+   - Resource Type
+   - Database Driver Vendor
+   ![JDBC Connection Pools page](images/e2_p3_new_jdbc_pool_step1.png "JDBC Connection Pools page")
+6. Another page is loaded to enter more information about the database to connect to. In the next page enter the following values:
+   - Datasource Classname: com.mysql.cj.jdbc.MysqlDataSource
+      ![JDBC Connection Pool page](images/e2_p3_new_jdbc_pool_step2.1.png "JDBC Connection Pool page")
+   - Database Server connection parameters: at the bottom of the same page, enter the following values:
+     * password
+     * databaseName
+     * serverName
+     * user
+     * useSSL
+     * portNumber
+     ![JDBC Connection page](images/e2_p3_new_jdbc_pool_step2.2.png "JDBC Connection page")
+7. Click on Finish and your JDBC Connection Pool will appear in the JDBC Connection Pools page, click on it.
+   ![JDBC Connection Pools page](images/e2_p3_new_jdbc_pool_step2.3.png "JDBC Connection Pools page")
+8. In order to ensure that the JDBC Connection Pool was configured properly, click on the Ping button.
+   ![JDBC Connection Pool ping](images/e2_p3_new_jdbc_pool_step2.4.png "JDBC Connection Pool ping")
 
 ## Exercise 04: Referring and obtaining a remote reference of an Object.
 
