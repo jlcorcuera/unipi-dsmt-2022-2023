@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>DSMT: Lab 07</title>
+    <title>DSMT: Lab 09</title>
     <style>
         .red {
             color: red;
@@ -29,36 +29,36 @@
 %>
 
 <body>
-<h1>Welcome, the current time is <%= currentDateTime %></h1>
-<br>
-<b><p>Fib(n) = Fib(n - 1) + Fib(n - 2) </p></b>
-<p>Listing first <%= n %> Fibonacci numbers:</p>
-<%
-    int fib1 = 0;
-    int fib2 = 1;
-%>
-<p>Fib(0) = <%= fib1 %>.</p>
-<p>Fib(1) = <%= fib2 %>.</p>
-<%
-    for (int i = 2; i < n; i++) {
-        int curFib = fib1 + fib2;
-        fib1 = fib2;
-        fib2 = curFib;
-%>
-<p class="<%= (i % 2 == 0) ? "red" : "blue" %>">Fib(<%= i %>) = <%= curFib %>.</p>
-<% } %>
+    <h1>Welcome, the current time is <%= currentDateTime %></h1>
+    <br>
+    <b><p>Fib(n) = Fib(n - 1) + Fib(n - 2) </p></b>
+    <p>Listing first <%= n %> Fibonacci numbers:</p>
+    <%
+        int fib1 = 0;
+        int fib2 = 1;
+    %>
+    <p>Fib(0) = <%= fib1 %>.</p>
+    <p>Fib(1) = <%= fib2 %>.</p>
+    <%
+        for (int i = 2; i < n; i++) {
+            int curFib = fib1 + fib2;
+            fib1 = fib2;
+            fib2 = curFib;
+    %>
+    <p class="<%= (i % 2 == 0) ? "red" : "blue" %>">Fib(<%= i %>) = <%= curFib %>.</p>
+    <% } %>
 
-<h2>Examples</h2>
-<ul>
-    <li><a target="_blank" href="${pageContext.request.contextPath}/BeerSearchServlet">Servlet & JSP</a></li>
-    <li><a target="_blank" href="${pageContext.request.contextPath}/PeopleDirectoryServlet">SerlvetContext & Sessions</a></li>
-</ul>
-<h2>Exercises</h2>
-<ul>
-    <li><a target="_blank" href="#">Exercise 01: Search beer filter</a></li>
-    <li><a target="_blank" href="#">Exercise 02: Register a new beer</a></li>
-    <li><a target="_blank" href="#">Exercise 03: Adding a beer to a shopping cart</a></li>
-</ul>
+    <h2>Examples</h2>
+    <ul>
+        <li><a target="_blank" href="${pageContext.request.contextPath}/CalculatorServlet?action=add&a=151&b=100">CalculatorServlet example</a></li>
+        <li><a target="_blank" href="${pageContext.request.contextPath}/FortuneCookieServlet">FortuneCookieServlet example</a></li>
+    </ul>
+    <h2>Exercises</h2>
+    <ul>
+        <li><a target="_blank" href="#">Exercise 01: BeersEJB</a></li>
+        <li><a target="_blank" href="#">Exercise 02: BeersEJB v.2.0</a></li>
+        <li><a target="_blank" href="#">Shopping Cart EJB</a></li>
+    </ul>
 
 </body>
 </html>

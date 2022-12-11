@@ -129,6 +129,13 @@ Again, we are going to make use of the Glassfish Administration console. Note th
    ![JDBC Connection Pools page](images/e2_p3_new_jdbc_pool_step2.3.png "JDBC Connection Pools page")
 8. In order to ensure that the JDBC Connection Pool was configured properly, click on the Ping button.
    ![JDBC Connection Pool ping](images/e2_p3_new_jdbc_pool_step2.4.png "JDBC Connection Pool ping")
+9. Once we verified that the JDBC Connection Pool works properly, we can proceed to create a **JDBC Resource**,
+so navigate to the page shown in the next page and click in the **New...** button:
+   ![JDBC Resource list](images/e2_p3_new_jdbc_resource_step1.png "JDBC Resource list")
+10. In the displayed page, complete the information as it is shown in the next screenshot and click in the **OK** button.
+    ![New JDBC Resource](images/e2_p3_new_jdbc_resource_step2.png "New JDBC Resource")
+
+
 
 ## Exercise 04: Referring and obtaining a remote reference of an Object.
 

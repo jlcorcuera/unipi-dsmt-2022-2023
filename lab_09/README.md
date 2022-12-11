@@ -38,6 +38,12 @@ Run the following command in a terminal by using (do not forget to update/provid
 mysql -u <user> -p < world.sql
 ```
 
+## Configuring a JDBC Resource
+
+Please, perform the steps defined to create a [JDBC Resource](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/lab_08#exercise-03-creating-a-jdbc-resource): jdbc/WorldPool.
+
+**Now, you are ready to deploy the EJB and Web application projects in Glassfish.**
+
 ## Exercise 01: BeersEJB
 
 The solution will be uploaded Nov 10th.
