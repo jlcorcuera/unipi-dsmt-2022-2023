@@ -1,5 +1,5 @@
 
-# Hands-on session 10: EJBs
+# Hands-on session 10: JMS & WebSockets
 
 In this session, the next topics are covered:
 
