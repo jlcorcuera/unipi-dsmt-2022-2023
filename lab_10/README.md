@@ -36,9 +36,13 @@ Also, do not forget to define the following environment variables:
 [SDKMAN](https://sdkman.io/).
 
 
-## Configuring a JMS Destination Resource
+## Configuring a New JMS Destination Resource
 
-TODO
+Create a New JMS Destination Resource with the following information:
+- JNDI Name: jms/ContactUsQueue
+- Physical Destination Name: contactusqueue
+- Resource Type: jakarta.jms.Queue
+  ![New JMS Destination Resource](images/configure-jms-destination-resource.png "New JMS Destination Resource")
 
 **Now, you are ready to deploy the EJB and Web application projects in Glassfish.**
 
@@ -46,6 +50,6 @@ TODO
 
 The solution will be uploaded Nov 18th.
 
-## Exercise 02: Adding the username in Chat Application
+## Exercise 02: Chat direct message
 
 The solution will be uploaded Nov 18th.
