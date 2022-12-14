@@ -20,7 +20,7 @@ public class BeerRestController {
     @Autowired
     private BeerService beerService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public ResponseDTO<List<BeerSearchDTO>> search(@RequestParam(name = "name", required = false) String name,
                                                                   @RequestParam(name = "price-start", required = false) Float priceStart,
                                                                   @RequestParam(name = "price-end", required = false) Float priceEnd) {
