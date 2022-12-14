@@ -17,6 +17,7 @@
       var pathname = document.location.pathname;
 
       const url = "ws://" + host  + pathname + "chat/" + username;
+      alert('url: ' + url);
       ws = new WebSocket(url);
 
       ws.onmessage = function(event) {
