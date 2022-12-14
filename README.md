@@ -17,7 +17,7 @@
 - [Hands-on session 8: Glassfish & JDBC Resources](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/lab_08)
 - [Hands-on session 9: EJBs](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/lab_09)
 - [Hands-on session 10: JMS & Web Sockets](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/lab_10)
-- Hands-on session 11: Microservices (work in progress)
+- [Hands-on session 11: Microservices](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/lab_11)
 
 ## Extra
 
