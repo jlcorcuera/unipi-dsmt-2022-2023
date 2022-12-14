@@ -1,0 +1,15 @@
+package it.unipi.dsmt.microservices.msbeer.dto;
+
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Builder
+public class BeerFiltersDTO {
+    private String name;
+    private Float priceStart;
+    private Float priceEnd;
+}
