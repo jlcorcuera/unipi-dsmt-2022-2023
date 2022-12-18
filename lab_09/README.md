@@ -54,8 +54,8 @@ The goal for this exercise is to implement an EJB which implements a method call
 
 In this project we have two define our BeerDTO DTO and BeerEJB interface (you can check the implementation in these files):
 
-**File: src/main/java/it/unipi/dsmt/jakartaee/lab_09_ejb_interfaces/dto/BeerDTO.java**
-**File: src/main/java/it/unipi/dsmt/jakartaee/lab_09_ejb_interfaces/interfaces/BeerEJB.java**
+- **File: src/main/java/it/unipi/dsmt/jakartaee/lab_09_ejb_interfaces/dto/BeerDTO.java**
+- **File: src/main/java/it/unipi/dsmt/jakartaee/lab_09_ejb_interfaces/interfaces/BeerEJB.java**
 
 ### Project lab-09-ejb
 
