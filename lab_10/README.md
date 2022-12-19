@@ -515,3 +515,5 @@ private static Map<String, String> users = new HashMap<String, String>();
         target.src = url;
     });
 ```
+
+#### 4. By the way, remember to access this Web Application by using https. For more information read [this](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia). Luckily, Glassfish also starts https at the 8181 port, example: https://localhost:8181/lab-10-chat/.
