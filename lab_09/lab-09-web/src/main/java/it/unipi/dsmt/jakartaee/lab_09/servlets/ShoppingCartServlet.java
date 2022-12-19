@@ -42,7 +42,6 @@ public class ShoppingCartServlet extends HttpServlet {
 
     private void processView(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String targetResource = "/WEB-INF/jsp/shopping_cart.jsp";
-        HttpSession session = request.getSession(true);
         ShoppingCartEJB shoppingCartEJB = retrieveShoppingCartEJB(request);
         int numberOfProducts = shoppingCartEJB.getTotalNumberProducts();
         List<BeerDTO> products = shoppingCartEJB.getBeerDTOList();
