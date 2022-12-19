@@ -180,3 +180,8 @@ public class OrdersConsumerEJB implements MessageListener {
 ## Exercise 02: Chat direct message
 
 The solution will be uploaded Nov 18th.
+
+
+## Exercise 03: Video Streaming
+
+The solution will be uploaded Nov 18th.
