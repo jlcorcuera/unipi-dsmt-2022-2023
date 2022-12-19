@@ -181,7 +181,7 @@ public class OrdersConsumerEJB implements MessageListener {
 
 For this question, we are going to create new files. At the UI level, it is required to add a new input text to allow users enter their username in addition to their name.
 
-1. To identify a direct message, the message should start with **@**, follow the username. 
+#### 1. To identify a direct message, the message should start with **@**, follow the username. 
    - Take a look at the **WebSocket URL**.
    - Pay attention to the **send** javascript function. This function adds the **to** attribute to the JSON object when it is a direct message.
 
@@ -253,7 +253,7 @@ For this question, we are going to create new files. At the UI level, it is requ
 </html>
 ```
 
-2. The WebSocket URL includes two Path Variables: username and name. At the Java code, a WebSocket is defined by annotating the ChatDirectEndpoint class with the @ServerEndpoint annotation.
+#### 2. The WebSocket URL includes two Path Variables: username and name. At the Java code, a WebSocket is defined by annotating the ChatDirectEndpoint class with the @ServerEndpoint annotation.
   - There were defined two Map objets:
     * usernameSessionIdMap: To map a username with their session.
     * usernameNameMap: To map a username with their name.
