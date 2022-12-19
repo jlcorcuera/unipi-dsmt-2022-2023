@@ -48,7 +48,8 @@ Create a New JMS Destination Resource with the following information:
 
 ## Exercise 01: Shopping Cart Checkout
 
-For this exercise, it is required to [restore the database unipi](src/main/java/it/unipi/dsmt/jakartaee/lab_10_ejb/consumer/OrdersConsumerEJB.java) and [create a jdbc/BeerPool JDBC Resource](src/main/java/it/unipi/dsmt/jakartaee/lab_10_ejb/consumer/OrdersConsumerEJB.java).
+For this exercise, it is required to [restore the database unipi](src/main/java/it/unipi/dsmt/jakartaee/lab_10_ejb/consumer/OrdersConsumerEJB.java), [create a jdbc/BeerPool JDBC Resource](src/main/java/it/unipi/dsmt/jakartaee/lab_10_ejb/consumer/OrdersConsumerEJB.java)
+and create a JMS Destination Resource: **jms/OrdersQueue** (similar steps described in the previous point). 
 The following image illustrates the interaction between components.
 
 ![Component Diagram](images/component_diagram_exercise_1.jpg "Component Diagram")
