@@ -184,6 +184,7 @@ For this question, we are going to create new files. At the UI level, it is requ
 1. To identify a direct message, the message should start with **@**, follow the username. 
    - Take a look at the **WebSocket URL**.
    - Pay attention to the **send** javascript function. This function adds the **to** attribute to the JSON object when it is a direct message.
+
 **File: src/main/webapp/chat-direct.jsp**
 ```html
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -259,6 +260,7 @@ For this question, we are going to create new files. At the UI level, it is requ
   - Upon the arrival of a new message, the onMessage method is fired. This method identify, whether a message is direct or not by inspecting **to** attribute of the incoming message.
   - In case the username doesn't exist, the content of the message changes to "server> User doesn't exist.".
 
+**File: src/main/java/it/unipi/dsmt/javaee/lab_10/websockets/ChatDirectEndpoint.java**
 ```java
 package it.unipi.dsmt.javaee.lab_10.websockets;
 
