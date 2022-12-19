@@ -54,7 +54,7 @@ The following image illustrates the interaction between components.
 
 ![Component Diagram](images/component_diagram_exercise_1.jpg "Component Diagram")
 
-1. When a user clicks on the **checkout** button, a **POST** method call is performed to the ShoppingCartServlet servlet and the orderId generated is shown to the user.
+#### 1. When a user clicks on the **checkout** button, a **POST** method call is performed to the ShoppingCartServlet servlet and the orderId generated is shown to the user.
 
 **File: src/main/webapp/WEB-INF/jsp/shopping_cart.jsp**
 ```javascript
@@ -72,7 +72,7 @@ The following image illustrates the interaction between components.
     </script>
 ```
 
-2. The ShoppingCartServlet servlet, retrieves a ShoppingCartEJB instance. Next, the checkout method is invoked:
+#### 2. The ShoppingCartServlet servlet, retrieves a ShoppingCartEJB instance. Next, the checkout method is invoked:
 
 **File: src/main/java/it/unipi/dsmt/javaee/lab_10/servlets/ShoppingCartServlet.java**
 ```java
@@ -87,7 +87,7 @@ The following image illustrates the interaction between components.
   }
 ```
 
-3. The ShoppingCartEJB EJB has injected a reference of a stateless OrderEJBImpl EJB and the method createOrder is called during the execution of the checkout operation. OrderEJBImpl leaves a message into the OrdersQueue queue to let the warehouse know about this new order.
+#### 3. The ShoppingCartEJB EJB has injected a reference of a stateless OrderEJBImpl EJB and the method createOrder is called during the execution of the checkout operation. OrderEJBImpl leaves a message into the OrdersQueue queue to let the warehouse know about this new order.
 
 **File: src/main/java/it/unipi/dsmt/jakartaee/lab_10_ejb/producers/ShoppingCartEJBImpl.java**
 ```java
@@ -144,7 +144,7 @@ public class OrderEJBImpl {
 }
 ```
 
-4. In the consumer project, OrdersConsumerEJB EJB is created to pick up from the queue messages of type OrderDTO.
+#### 4. In the consumer project, OrdersConsumerEJB EJB is created to pick up from the queue messages of type OrderDTO.
 
 **File: src/main/java/it/unipi/dsmt/jakartaee/lab_10_ejb/consumer/OrdersConsumerEJB.java**
 ```java
