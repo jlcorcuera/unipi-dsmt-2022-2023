@@ -487,8 +487,7 @@ private static Map<String, String> users = new HashMap<String, String>();
 }
 ```
 
-#### 3. Finally, when a message is received, we have to get the sessionId and the stream of bytes which represent the image of a person. 
-The first 36 bytes represent the sessionId. In case an "image" HTML element with id "img_<session_id>" doesn't exist, we proceed to create it and display the received image there.
+#### 3. Finally, when a message is received, we have to get the sessionId and the stream of bytes which represent the image of a person. The first 36 bytes represent the sessionId. In case an "image" HTML element with id "img_<session_id>" doesn't exist, we proceed to create it and display the received image there; otherwise, we just update its image content.
 
 **File: src/main/webapp/video.jsp**
 ```javascript
