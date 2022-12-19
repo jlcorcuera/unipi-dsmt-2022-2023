@@ -79,9 +79,6 @@
     audio:false
   };
 
-
-
-
   function convertToBinary (dataURI) {
     // convert base64 to raw binary data held in a string
     // doesn't handle URLEncoded DataURIs

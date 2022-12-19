@@ -365,4 +365,154 @@ private static final Set<Session> chatEndpoints = new CopyOnWriteArraySet<Sessio
 
 ## Exercise 03: Video Streaming
 
-The solution will be uploaded Nov 18th.
+It is fascinating the kind of applications we can develop. We can use of WebSockets to send a stream of bytes which represents a frame of a video. Let's review the code step by step:
+
+#### 1. When a user enters their name and clicks on the Connect button, three main actions happen:
+   1. The browser asks for permissions to access the WebCam. If the user accepts then an HTML video element is bind to a stream produced by the WebCam.
+   2. Every 333 ms, the function main is called.
+   3. The function main gets a frame from the HTML video element and draw it on a canvas, next, the content of the canvas is converted into an image. Finally, this image is converted into a byte array and send to the WebSocket.
+
+**File: src/main/webapp/video.jsp**
+```javascript
+      ws.addEventListener('open', (event) => {
+        navigator.mediaDevices.getUserMedia(options).then(function(stream){
+          video.srcObject=stream;
+          video.play();
+        }).catch(function(err){
+
+        });
+        setInterval(main, 333);
+      });
+
+    function convertToBinary (dataURI) {
+        // convert base64 to raw binary data held in a string
+        // doesn't handle URLEncoded DataURIs
+        var byteString = atob(dataURI.split(',')[1]);
+    
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+    
+        // write the bytes of the string to an ArrayBuffer
+        var ab = new ArrayBuffer(byteString.length);
+        var ia = new Uint8Array(ab);
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+    
+        // write the ArrayBuffer to a blob, and you're done
+        var bb = new Blob([ab]);
+        return bb;
+    }
+    
+    function main(){
+        context.drawImage(video,0,0,canvas.width, canvas.height);
+        const data = canvas.toDataURL('image/jpeg', 1.0);
+        const newblob = convertToBinary(data);
+        ws.send(newblob);
+    }
+```
+
+#### 2. The WebSocket will receive this stream of bytes (represented by an array of bytes). Remember that at the UI level, for each user an image of them should be displayed, so we have to create dynamically these images. 
+In the onMessage method, the byte array representation of the sender's sessionId is appended to the imageData byte array (this represents the byte streaming sent).
+
+```java
+package it.unipi.dsmt.javaee.lab_10.websockets;
+
+import jakarta.websocket.*;
+import jakarta.websocket.server.PathParam;
+import jakarta.websocket.server.ServerEndpoint;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
+@ServerEndpoint(value = "/video/{username}")
+public class VideoEndpoint {
+private static final Set<Session> videoEndpoints = new CopyOnWriteArraySet<Session>();
+private static Map<String, String> users = new HashMap<String, String>();
+
+    @OnOpen
+    public void onOpen(Session session, @PathParam("username") String username) throws IOException, EncodeException {
+        videoEndpoints.add(session);
+        users.put(session.getId(), username);
+        System.out.println("Session ID: " + session.getId());
+        byte[] sessionIdBytes = session.getId().getBytes();
+        System.out.println("Session LEN: " + sessionIdBytes.length);
+    }
+
+    @OnMessage
+    public void onMessage(byte[] imageData, Session session) throws IOException, EncodeException {
+        byte[] sessionIdBytes = session.getId().getBytes();
+        ByteBuffer buf = ByteBuffer.wrap(concat(sessionIdBytes, imageData));
+        broadcast(session.getId(), buf);
+    }
+
+    public static byte[] concat(byte[] a, byte[] b) {
+        int lenA = a.length;
+        int lenB = b.length;
+        byte[] c = Arrays.copyOf(a, lenA + lenB);
+        System.arraycopy(b, 0, c, lenA, lenB);
+        return c;
+    }
+
+    @OnClose
+    public void onClose(Session session) throws IOException, EncodeException {
+        videoEndpoints.remove(session);
+
+    }
+
+    @OnError
+    public void onError(Session session, Throwable throwable) {
+        throwable.printStackTrace();
+    }
+
+    private static void broadcast(String sessionIdNotToNotify, ByteBuffer video) throws IOException, EncodeException {
+        videoEndpoints.forEach(session -> {
+            if (!sessionIdNotToNotify.equals(session.getId())) {
+                synchronized (session) {
+                    try {
+                        session.getBasicRemote()
+                                .sendBinary(video);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+}
+```
+
+#### 3. Finally, when a message is received, we have to get the sessionId and the stream of bytes which represent the image of a person. 
+The first 36 bytes represent the sessionId. In case an "image" HTML element with id "img_<session_id>" doesn't exist, we proceed to create it and display the received image there.
+
+**File: src/main/webapp/video.jsp**
+```javascript
+    ws.addEventListener('message', async function(event){
+
+      let blob = event.data.slice(36, event.data.size);
+      let sessionIdBlob = event.data.slice(0, 36);
+      const sessionId = await sessionIdBlob.text();
+      console.log('sessionId: ' + sessionId);
+
+      let target = document.getElementById("img_" + sessionId);
+      if (target == undefined) {
+          const image = document.createElement('img');
+          image.setAttribute('id', "img_" + sessionId);
+          image.setAttribute('style', "display: inline;");
+          const box = document.getElementById('all-sessions');
+          box.appendChild(image);
+          target = image;
+      }
+
+      var url = window.webkitURL.createObjectURL(blob);
+        target.onload = function() {
+          window.webkitURL.revokeObjectURL(url);
+        };
+        target.src = url;
+    });
+```
