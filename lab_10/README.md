@@ -179,8 +179,187 @@ public class OrdersConsumerEJB implements MessageListener {
 
 ## Exercise 02: Chat direct message
 
-The solution will be uploaded Nov 18th.
+For this question, we are going to create new files. At the UI level, it is required to add a new input text to allow users enter their username in addition to their name.
 
+1. To identify a direct message, the message should start with **@**, follow the username. 
+   - Take a look at the **WebSocket URL**.
+   - Pay attention to the **send** javascript function. This function adds the **to** attribute to the JSON object when it is a direct message.
+**File: src/main/webapp/chat-direct.jsp**
+```html
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+  <title>Lab 10: WebSockets - Chat</title>
+  <script type="application/javascript">
+    var ws;
+    function connect() {
+      var username = document.getElementById("username").value;
+      var name = document.getElementById("name").value;
+      var host = document.location.host;
+      var pathname = "${pageContext.request.contextPath}";
+
+      const url = "ws://" + host  + pathname + "/chat-direct/" + username + "/" + name;
+      alert('url: ' + url);
+      ws = new WebSocket(url);
+
+      ws.onmessage = function(event) {
+        var log = document.getElementById("log");
+        console.log(event.data);
+        var message = JSON.parse(event.data);
+        log.innerHTML += message.from + " : " + message.content + "\n";
+      };
+    }
+
+    function send() {
+      var content = document.getElementById("msg").value;
+      var username = document.getElementById("username").value;
+      var message = {
+        "from": username,
+        "content":content
+      };
+      if (content.startsWith('@')) {
+          message['to'] = content.substring(1, content.indexOf(' '));
+          message['content'] = content.substring(content.indexOf(' ') + 1);
+      }
+      var json = JSON.stringify(message);
+      alert(json);
+      ws.send(json);
+    }
+  </script>
+</head>
+<body>
+<table>
+  <tr>
+    <td colspan="3">
+      <input type="text" id="username" placeholder="Username"/>
+      <input type="text" id="name" placeholder="Name"/>
+      <button type="button" onclick="connect();" >Connect</button>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <textarea readonly="true" rows="10" cols="80" id="log"></textarea>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" size="51" id="msg" placeholder="Message"/>
+      <button type="button" onclick="send();" >Send</button>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
+```
+
+2. The WebSocket URL includes two Path Variables: username and name. At the Java code, a WebSocket is defined by annotating the ChatDirectEndpoint class with the @ServerEndpoint annotation.
+  - There were defined two Map objets:
+    * usernameSessionIdMap: To map a username with their session.
+    * usernameNameMap: To map a username with their name.
+  - Upon the arrival of a new message, the onMessage method is fired. This method identify, whether a message is direct or not by inspecting **to** attribute of the incoming message.
+  - In case the username doesn't exist, the content of the message changes to "server> User doesn't exist.".
+
+```java
+package it.unipi.dsmt.javaee.lab_10.websockets;
+
+import it.unipi.dsmt.javaee.lab_10.dto.MessageDTO;
+import it.unipi.dsmt.javaee.lab_10.serializers.MessageDTODecoder;
+import it.unipi.dsmt.javaee.lab_10.serializers.MessageDTOEncoder;
+import jakarta.websocket.EncodeException;
+import jakarta.websocket.OnClose;
+import jakarta.websocket.OnError;
+import jakarta.websocket.OnMessage;
+import jakarta.websocket.OnOpen;
+import jakarta.websocket.Session;
+import jakarta.websocket.server.PathParam;
+import jakarta.websocket.server.ServerEndpoint;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
+
+@ServerEndpoint(value = "/chat-direct/{username}/{name}", decoders = MessageDTODecoder.class, encoders = MessageDTOEncoder.class)
+public class ChatDirectEndpoint {
+private static final Set<Session> chatEndpoints = new CopyOnWriteArraySet<Session>();
+
+    private static Map<String, Session> usernameSessionIdMap = new HashMap<String, Session>();
+    private static Map<String, String> usernameNameMap = new HashMap<String, String>();
+
+    @OnOpen
+    public void onOpen(Session session,
+                       @PathParam("username") String username,
+                       @PathParam("name") String name) throws IOException, EncodeException {
+        chatEndpoints.add(session);
+        usernameSessionIdMap.put(username, session);
+        usernameNameMap.put(username, name);
+        MessageDTO message = new MessageDTO();
+        message.setFrom(name + "(" + username + ")");
+        message.setContent("Connected!");
+        broadcast(message);
+    }
+
+    @OnMessage
+    public void onMessage(Session session, MessageDTO message) throws IOException, EncodeException {
+        String toUsername = message.getTo();
+        String username = message.getFrom();
+        String name = usernameNameMap.get(username);
+        message.setFrom(name + "(" + username + ")");
+        if (toUsername != null && !toUsername.isEmpty()){
+            Session sessionToNotify = usernameSessionIdMap.get(toUsername);
+            if (sessionToNotify != null) {
+                sendMessageToSession(sessionToNotify, message);
+            } else {
+                message.setContent("server> User doesn't exist.");
+            }
+            sendMessageToSession(session, message);
+        } else {
+            broadcast(message);
+        }
+    }
+
+    @OnClose
+    public void onClose(Session session) throws IOException, EncodeException {
+        chatEndpoints.remove(session);
+        String username = null;
+        for(Map.Entry<String, Session> entry: usernameSessionIdMap.entrySet()){
+            if (entry.getValue().getId().equals(session.getId())){
+                username = entry.getKey();
+                break;
+            }
+        }
+        String name = usernameNameMap.get(username);
+        MessageDTO message = new MessageDTO();
+        message.setFrom(name);
+        message.setContent("Disconnected!");
+        broadcast(message);
+        usernameSessionIdMap.remove(username);
+        usernameNameMap.remove(username);
+    }
+
+    @OnError
+    public void onError(Session session, Throwable throwable) {
+        // Do error handling here
+    }
+
+    private static void broadcast(MessageDTO message) throws IOException, EncodeException {
+        chatEndpoints.forEach(session -> {
+            sendMessageToSession(session, message);
+        });
+    }
+
+    private static void sendMessageToSession(Session session, MessageDTO message){
+        synchronized (session) {
+            try {
+                session.getBasicRemote().sendObject(message);
+            } catch (IOException | EncodeException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
 
 ## Exercise 03: Video Streaming
 
