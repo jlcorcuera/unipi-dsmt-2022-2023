@@ -162,3 +162,21 @@ As a result of the above command you will see something similar to the following
 ```
 
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise04 java class and run it.
+
+The above steps are to send data from two Erlang Nodes( one the server and the other the Client Node). 
+Now lets try to connect from the Java side to the Erlan Server Node.
+Step 1: Go compile the maven project by clicking on the compile lifecycle. 
+Step 2: Once the target directory is generated  open a terminal and cd to the target dir. Run this command
+```bash
+java -jar java_erlang.jar 
+```
+Then you will be prompted to enter your firstname and lastname:
+```bash
+Enter your firstname: Adam   
+Enter your lastname: Maraki
+```
+Finally you will see a message as follows:
+```bash
+Sending message to the server ...
+```
+This is the  end of the lab!
