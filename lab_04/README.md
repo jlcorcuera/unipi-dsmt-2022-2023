@@ -172,8 +172,8 @@ java -jar java_erlang.jar
 ```
 Then you will be prompted to enter your firstname and lastname:
 ```bash
-Enter your firstname: Adam   
-Enter your lastname: Maraki
+Enter your firstname: Tesfaye   
+Enter your lastname: Yimam
 ```
 Finally you will see a message as follows:
 ```bash
