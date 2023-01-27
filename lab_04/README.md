@@ -74,7 +74,7 @@ erl -name hello_client@127.0.0.1 -setcookie 'hellocookie'
 ```
 
 After the connection is established between the Server and the Client process. The client can send data to the server as follows.
-Client to send message:
+Client to send message (NB: dont forget the $${\color{red}dot}$$  🅰️dot🅰️ at the end of the command, it is part of the erlang  syntax):
 
 ```bash 
 
