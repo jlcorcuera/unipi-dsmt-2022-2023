@@ -29,6 +29,12 @@ Also, do not forget to define the following environment variables:
 [SDKMAN](https://sdkman.io/).
 
 **Make sure Erlang Port Mapper Daemon (epmd) is running.**
+Try this command on your [Terminator](https://linuxhint.com/install-terminator-ubuntu-22-04/)  to check the status of the epmd:
+```bash
+
+ ps ax | grep epmd
+
+```
 ## Jinterface installation
 
 Install into your Maven local repository the jinterface dependency:
@@ -74,7 +80,7 @@ erl -name hello_client@127.0.0.1 -setcookie 'hellocookie'
 ```
 
 After the connection is established between the Server and the Client process. The client can send data to the server as follows.
-Client to send message (NB: dont forget the 🅰️dot🅰️ at the end of the command, it is part of the erlang  syntax):
+Client to send message (NB: dont forget the 🟥dot🟥 at the end of the command, it is part of the erlang  syntax):
 
 ```bash 
 
