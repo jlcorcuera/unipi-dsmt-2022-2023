@@ -15,7 +15,7 @@ For this session it is required to have installed:
 
 - Java SDK 11. (*)
 - Apache Maven 3.x version. (*)
-- Erlang OTP.
+- Erlang OTP. You can install the Erlang OTP from (here)[https://computingforgeeks.com/how-to-install-latest-erlang-on-ubuntu-linux/], given that you are usig Ubuntu}. Given that you are using Ubuntu. 
 - An IDE (IntelliJ, Eclipse, Netbeans)
 
 Also, do not forget to define the following environment variables:
@@ -51,7 +51,7 @@ Enter to the "erlang_files" directory and compile all erlang files
   erlc *.erl
 ```
 
-To start the Hello Erlang Server process:
+To start the Hello Erlang Server process:(Open a terminal and run the following command).
 
 ```bash
   erl -name hello_server@127.0.0.1 \
@@ -61,12 +61,33 @@ To start the Hello Erlang Server process:
 ```
 
 The server process should display the following message:
-
 ```bash
   Registered MailBox alias: "HelloMailBox" for PID: <0.9.0> 
   hello_server: waiting for new messages... 
+  
+```
+To start the Cleint process:(Open an other terminal and run the following command).
+
+```bash
+erl -name hello_client@127.0.0.1 -setcookie 'hellocookie'
 ```
 
+After the connection is established between the Server and the Cliend process. The clien can send data to the server as follows.
+Client to send message:
+
+```bash 
+
+{'HelloMailBox', 'hello_server@127.0.0.1'} ! {self(), "Tesfaye Yimam"}.
+
+```
+Finally the client can read the message as follows:
+Client to read a message:
+
+```bash
+receive T -> T end.
+```
+
+For Lab 04 you can follow similar steps and update the the variables accordinglty.
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise03 java class and run it.
 ## Exercise 04: Cookie Quotes Server
 
