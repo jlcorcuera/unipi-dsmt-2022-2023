@@ -17,6 +17,7 @@ For this session it is required to have installed:
 - Apache Maven 3.x version. (*)
 - Erlang OTP. You can install the Erlang OTP from [here](https://computingforgeeks.com/how-to-install-latest-erlang-on-ubuntu-linux/), given that you are usig Ubuntu}. Given that you are using Ubuntu. 
 - An IDE (IntelliJ, Eclipse, Netbeans)
+- [Terminator](https://linuxhint.com/install-terminator-ubuntu-22-04/) terminal.
 
 Also, do not forget to define the following environment variables:
 
@@ -66,7 +67,7 @@ The server process should display the following message:
   hello_server: waiting for new messages... 
   
 ```
-To start the Cleint process:(Open an other terminal and run the following command).
+To start the Cleint process:( Open an other terminal and run the following command ).
 
 ```bash
 erl -name hello_client@127.0.0.1 -setcookie 'hellocookie'
