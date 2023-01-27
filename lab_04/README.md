@@ -17,7 +17,7 @@ For this session it is required to have installed:
 - Apache Maven 3.x version. (*)
 - Erlang OTP. You can install the Erlang OTP from [here](https://computingforgeeks.com/how-to-install-latest-erlang-on-ubuntu-linux/), given that you are usig Ubuntu}. Given that you are using Ubuntu. 
 - An IDE (IntelliJ, Eclipse, Netbeans)
-- [Terminator](https://linuxhint.com/install-terminator-ubuntu-22-04/) terminal.
+- [Terminator](https://linuxhint.com/install-terminator-ubuntu-22-04/) terminal.(This one is optional).
 
 Also, do not forget to define the following environment variables:
 
