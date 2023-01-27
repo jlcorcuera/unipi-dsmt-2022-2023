@@ -156,7 +156,9 @@ Now, to receive the randomly generated quote you can run following command on th
  receive T -> T end.
 ```
 As a result of the above command you will see something similar to the following in the client's terminal.
-``bash
-{ok,"Hello Tesfaye Yimam, this quote is for you: The only way to have a friend is to be one."}
+
+```bash
+ {ok,"Hello Tesfaye Yimam, this quote is for you: The only way to have a friend is to be one."}
 ```
+
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise04 java class and run it.
