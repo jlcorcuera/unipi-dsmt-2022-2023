@@ -15,7 +15,7 @@ For this session it is required to have installed:
 
 - Java SDK 11. (*)
 - Apache Maven 3.x version. (*)
-- Erlang OTP. You can install the Erlang OTP from (here)[https://computingforgeeks.com/how-to-install-latest-erlang-on-ubuntu-linux/], given that you are usig Ubuntu}. Given that you are using Ubuntu. 
+- Erlang OTP. You can install the Erlang OTP from [here](https://computingforgeeks.com/how-to-install-latest-erlang-on-ubuntu-linux/), given that you are usig Ubuntu}. Given that you are using Ubuntu. 
 - An IDE (IntelliJ, Eclipse, Netbeans)
 
 Also, do not forget to define the following environment variables:
@@ -72,7 +72,7 @@ To start the Cleint process:(Open an other terminal and run the following comman
 erl -name hello_client@127.0.0.1 -setcookie 'hellocookie'
 ```
 
-After the connection is established between the Server and the Cliend process. The clien can send data to the server as follows.
+After the connection is established between the Server and the Client process. The client can send data to the server as follows.
 Client to send message:
 
 ```bash 
