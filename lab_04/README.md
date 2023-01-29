@@ -50,6 +50,7 @@ mvn install:install-file \
 ```
 
 ## Exercise 03: Hello from Erlang!
+## Part One (Communication between two Erlang Nodes: The Server and the Client Nodes).
 
 Enter to the "erlang_files" directory and compile all erlang files
 
@@ -103,7 +104,7 @@ Then you will the client will receive a message that seems the following:
 For Lab 04 you can follow similar steps and update the the variables accordinglty.
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise03 java class and run it.
 ## Exercise 04: Cookie Quotes Server
-
+## Part One (Communication between two Erlang Nodes: The Server and the Client Nodes).
 Enter to the "erlang_files" directory and compile all erlang files
 
 ```bash
@@ -160,11 +161,11 @@ As a result of the above command you will see something similar to the following
 ```bash
  {ok,"Hello Tesfaye Yimam, this quote is for you: The only way to have a friend is to be one."}
 ```
-
-Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise04 java class and run it.
+ 
+## Part Two (Communication between two Nodes: The **Erlang Server** and the **Java Client** Nodes).
 
 The above steps are to send data from two Erlang Nodes( one the server and the other the Client Node). 
-Now lets try to connect from the Java side to the Erlan Server Node.
+Now it is time to try to connect from the Java Client Node to the Erlang Server Node.
 Step 1: Go compile the maven project by clicking on the compile lifecycle. 
 Step 2: Once the target directory is generated  open a terminal and cd to the target dir. Run this command
 ```bash
@@ -175,8 +176,13 @@ Then you will be prompted to enter your firstname and lastname:
 Enter your firstname: Tesfaye   
 Enter your lastname: Yimam
 ```
-Finally you will see a message as follows:
+Hence form the java node you will see a message as follows:
 ```bash
 Sending message to the server ...
+```
+Finally, the Erlang Server Node will send a random quote to the Java Client that looks like this one:
+
+```bash
+{ "Hello Tesfaye Yimam, this quote is for you: Come back later. I am sleeping (yes, cookies need their sleep, too).."}
 ```
 This is the  end of the lab!
