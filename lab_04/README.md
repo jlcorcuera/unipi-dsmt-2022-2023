@@ -15,8 +15,9 @@ For this session it is required to have installed:
 
 - Java SDK 11. (*)
 - Apache Maven 3.x version. (*)
-- Erlang OTP.
+- Erlang OTP. You can install the Erlang OTP from [here](https://computingforgeeks.com/how-to-install-latest-erlang-on-ubuntu-linux/), given that you are usig Ubuntu}. Given that you are using Ubuntu. 
 - An IDE (IntelliJ, Eclipse, Netbeans)
+- [Terminator](https://linuxhint.com/install-terminator-ubuntu-22-04/) terminal.(This one is optional).
 
 Also, do not forget to define the following environment variables:
 
@@ -28,6 +29,12 @@ Also, do not forget to define the following environment variables:
 [SDKMAN](https://sdkman.io/).
 
 **Make sure Erlang Port Mapper Daemon (epmd) is running.**
+Try this command on your [Terminator](https://linuxhint.com/install-terminator-ubuntu-22-04/)  to check the status of the epmd:
+```bash
+
+ ps ax | grep epmd
+
+```
 ## Jinterface installation
 
 Install into your Maven local repository the jinterface dependency:
@@ -43,6 +50,7 @@ mvn install:install-file \
 ```
 
 ## Exercise 03: Hello from Erlang!
+## Part One (Communication between two Erlang Nodes: The Server and the Client Nodes).
 
 Enter to the "erlang_files" directory and compile all erlang files
 
@@ -51,7 +59,7 @@ Enter to the "erlang_files" directory and compile all erlang files
   erlc *.erl
 ```
 
-To start the Hello Erlang Server process:
+To start the Hello Erlang Server process:(Open a terminal and run the following command).
 
 ```bash
   erl -name hello_server@127.0.0.1 \
@@ -65,11 +73,38 @@ The server process should display the following message:
 ```bash
   Registered MailBox alias: "HelloMailBox" for PID: <0.9.0> 
   hello_server: waiting for new messages... 
+  
+```
+To start the Cleint process:( Open an other terminal and run the following command ).
+
+```bash
+erl -name hello_client@127.0.0.1 -setcookie 'hellocookie'
 ```
 
+After the connection is established between the Server and the Client process. The client can send data to the server as follows.
+Client to send message (NB: dont forget the 🟥dot🟥 at the end of the command, it is part of the erlang  syntax):
+
+```bash 
+
+{'HelloMailBox', 'hello_server@127.0.0.1'} ! {self(), "Tesfaye Yimam"}.
+
+```
+Finally the client can read the message as follows:
+Client to read a message:
+
+```bash
+receive T -> T end.
+```
+Then you will the client will receive a message that seems the following:
+
+```bash
+
+```
+
+For Lab 04 you can follow similar steps and update the the variables accordinglty.
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise03 java class and run it.
 ## Exercise 04: Cookie Quotes Server
-
+## Part One (Communication between two Erlang Nodes: The Server and the Client Nodes).
 Enter to the "erlang_files" directory and compile all erlang files
 
 ```bash
@@ -77,7 +112,7 @@ Enter to the "erlang_files" directory and compile all erlang files
   erlc *.erl
 ```
 
-To start the Hello Erlang Server process:
+To start the Hello Erlang Server process open a terminal and run this command:
 
 ```bash
   erl -name quotes_server@127.0.0.1 \
@@ -85,7 +120,6 @@ To start the Hello Erlang Server process:
       -s quotes_server init \
       -noshell
 ```
-
 The server process should display the following message:
 
 ```bash
@@ -98,5 +132,57 @@ Loaded quotes: ["A new outlook brightens your image and brings new friends.",
 quotes_server: waiting for new messages... 
 
 ```
+For the Client, open an other terminal and run the following command.
 
-Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise04 java class and run it.
+```bash
+erl -name quotes_client@127.0.0.1 -setcookie 'abcde'
+```
+As the above command opens a new erlang node, you can now send a data to the server node y running the following command from the Client Node.
+
+```bash
+{'QuotesMailBox', 'quotes_server@127.0.0.1'} ! { self(),"Tesfaye","Yimam"}.
+```
+As a result, you will see a message similar to the following from the client Node:
+
+```bash
+{<0.86.0>,"Tesfaye","Yimam"}
+```
+And from the server Node you will see something similar like this one:
+```bash
+quotes_server: incoming message from "Tesfaye" "Yimam" (<8498.86.0>) 
+```
+Now, to receive the randomly generated quote you can run following command on the client Node( Dont forget the dot at the end of the Command!):
+
+```bash
+ receive T -> T end.
+```
+As a result of the above command you will see something similar to the following in the client's terminal.
+
+```bash
+ {ok,"Hello Tesfaye Yimam, this quote is for you: The only way to have a friend is to be one."}
+```
+ 
+## Part Two (Communication between two Nodes: The **Erlang Server** and the **Java Client** Nodes).
+
+The above steps are to send data from two Erlang Nodes( one the server and the other the Client Node). 
+Now it is time to try to connect from the Java Client Node to the Erlang Server Node.
+Step 1: Go compile the maven project by clicking on the compile lifecycle. 
+Step 2: Once the target directory is generated  open a terminal and cd to the target dir. Run this command
+```bash
+java -jar java_erlang.jar 
+```
+Then you will be prompted to enter your firstname and lastname:
+```bash
+Enter your firstname: Tesfaye   
+Enter your lastname: Yimam
+```
+Hence form the java node you will see a message as follows:
+```bash
+Sending message to the server ...
+```
+Finally, the Erlang Server Node will send a random quote to the Java Client that looks like this one:
+
+```bash
+{ "Hello Tesfaye Yimam, this quote is for you: Come back later. I am sleeping (yes, cookies need their sleep, too).."}
+```
+This is the  end of the lab!
