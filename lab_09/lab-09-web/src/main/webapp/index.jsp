@@ -55,9 +55,9 @@
     </ul>
     <h2>Exercises</h2>
     <ul>
-        <li><a target="_blank" href="#">Exercise 01: BeersEJB</a></li>
-        <li><a target="_blank" href="#">Exercise 02: BeersEJB v.2.0</a></li>
-        <li><a target="_blank" href="#">Shopping Cart EJB</a></li>
+        <li><a target="_blank" href="${pageContext.request.contextPath}/BeerSearch1Servlet">Exercise 01: BeersEJB</a></li>
+        <li><a target="_blank" href="${pageContext.request.contextPath}/BeerSearch2Servlet">Exercise 02: BeersEJB v.2.0</a></li>
+        <li><a target="_blank" href="${pageContext.request.contextPath}/BeerSearch2Servlet">Shopping Cart EJB</a></li>
     </ul>
 
 </body>

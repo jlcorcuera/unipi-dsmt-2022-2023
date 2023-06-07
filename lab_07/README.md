@@ -202,7 +202,7 @@ public class BeerManagerServlet extends HttpServlet {
 
 ## Exercise 03: Adding a beer to a shopping cart
 
-In order to display add beers to a shopping cart, we have to add logic in the **Add to cart** button to store the beers into the user web session.
+In order to display beers added to our shopping cart, we have to add logic in the **Add to cart** button to store the beers into the user web session.
 There are many changes to perform:
 
 1.  Every time a user clicks on a **Add to cart** button, the information of the productId and productName are sent to the server. We are going to send this information

@@ -1,0 +1,56 @@
+============ Make sure epmd is running.=============================
+=> Open your Terminator terminal and run this 
+ $ epmd
+====================================================================
+Hello Server:-( Run these two commands.)
+
+$ cd erlang_files
+$ erlc *.erl
+
+Server to Compile:
+$erlc hello_server.erl
+
+Server to Run:
+$ erl -name hello_server@127.0.0.1 -setcookie 'hellocookie' -s hello_server init -noshell
+
+Client - To run:
+$ erl -name hello_client@127.0.0.1 -setcookie 'hellocookie'
+
+===
+After the connection is established we can send data to the server.
+Client to send message:
+
+=> the first client my send the following data.
+{'HelloMailBox', 'hello_server@127.0.0.1'} ! {self(), "Tesfaye Yimam"}.
+
+=> the second one my send this one.
+{'HelloMailBox', 'hello_server@127.0.0.1'} ! {self(), "Client Y"}.
+
+=> the third one my send this one.
+{'HelloMailBox', 'hello_server@127.0.0.1'} ! {self(), "Client Z"}.
+===
+Client to read a message:
+
+receive T -> T end.
+
+===============================================================================
+Cookie Quotes Server:
+
+Server- To Compile:-
+erlc quotes_server.erl
+
+Server - To run:-
+
+erl -name quotes_server@127.0.0.1 -setcookie 'abcde' -s quotes_server init -noshell
+
+Client to run:-
+
+erl -name quotes_client@127.0.0.1 -setcookie 'abcde'
+
+Client to send message:-
+
+{'QuotesMailBox', 'quotes_server@127.0.0.1'} ! { self(),"Tesfaye","Yimam"}.
+
+Client to read a message:
+
+receive T -> T end.

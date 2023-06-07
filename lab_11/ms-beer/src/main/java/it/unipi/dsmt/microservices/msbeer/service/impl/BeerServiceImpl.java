@@ -1,10 +1,11 @@
-package it.unipi.dsmt.microservices.msbeer.service;
+package it.unipi.dsmt.microservices.msbeer.service.impl;
 
 import it.unipi.dsmt.microservices.msbeer.dao.BeerDAO;
 import it.unipi.dsmt.microservices.msbeer.dto.BeerDTO;
 import it.unipi.dsmt.microservices.msbeer.dto.BeerFiltersDTO;
 import it.unipi.dsmt.microservices.msbeer.dto.BeerSearchDTO;
 import it.unipi.dsmt.microservices.msbeer.model.Beer;
+import it.unipi.dsmt.microservices.msbeer.service.BeerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class BeerServiceImpl implements BeerService{
+public class BeerServiceImpl implements BeerService {
 
     @Autowired
     private BeerDAO beerDAO;

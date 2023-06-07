@@ -23,6 +23,6 @@ public class ContactUsServlet extends HttpServlet {
         dto.setEmail(email);
         dto.setComments(comments);
         contactUsEJB.processContactUsDTO(dto);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("contact-us-form-jms.jsp");
     }
 }

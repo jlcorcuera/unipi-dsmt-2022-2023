@@ -1,4 +1,4 @@
-package it.unipi.dsmt.jakartaee.lab_09_ejb;
+package it.unipi.dsmt.jakartaee.lab_09_ejb.ejb;
 
 import it.unipi.dsmt.jakartaee.lab_09_ejb_interfaces.interfaces.QuotesEJB;
 import jakarta.ejb.Stateless;
