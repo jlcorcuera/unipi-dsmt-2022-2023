@@ -23,3 +23,9 @@
 
 - [Packaging Java Desktop, Jakarta Web or Jakarta EJB projects](#)
 - Configuration of two [Docker images](https://github.com/jlcorcuera/unipi-dsmt-2022-2023/tree/main/infraestructure) are provided
+
+## Community
+
+<a href="https://github.com/jlcorcuera/unipi-dsmt-2022-2023/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jlcorcuera/unipi-dsmt-2022-2023" />
+</a>
