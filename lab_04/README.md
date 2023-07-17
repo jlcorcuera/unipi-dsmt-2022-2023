@@ -95,11 +95,6 @@ Client to read a message:
 ```bash
 receive T -> T end.
 ```
-Then you will the client will receive a message that seems the following:
-
-```bash
-
-```
 
 For Lab 04 you can follow similar steps and update the the variables accordinglty.
 Update some configuration variables (i.e: serverName, serverMailBox, etc.) in the it.unipi.dsmt.javaerlang.Exercise03 java class and run it.
